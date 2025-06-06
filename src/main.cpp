@@ -1,9 +1,10 @@
 #include "core/Game.hpp"
+#include <windows.h>
 
-int main() {
-    HINSTANCE hInstance = GetModuleHandle(nullptr);
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int) {
     Game game(hInstance);
     if (!game.initialize()) {
+        MessageBox(nullptr, L"Falha ao inicializar o jogo.", L"Erro", MB_OK | MB_ICONERROR);
         return -1;
     }
 

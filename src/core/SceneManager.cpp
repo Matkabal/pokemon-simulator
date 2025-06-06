@@ -1,10 +1,21 @@
 #include "core/SceneManager.hpp"
 
-void SceneManager::setScene(Scene* scene) {
+SceneManager::SceneManager() {}
+
+SceneManager::~SceneManager() {
+    if (currentScene) {
+        currentScene->unload();
+        currentScene.reset();
+    }
+}
+
+void SceneManager::changeScene(std::unique_ptr<Scene> newScene) {
     if (currentScene) {
         currentScene->unload();
     }
-    currentScene = scene;
+
+    currentScene = std::move(newScene);
+
     if (currentScene) {
         currentScene->load();
     }
@@ -20,15 +31,4 @@ void SceneManager::render() {
     if (currentScene) {
         currentScene->render();
     }
-}
-
-void SceneManager::unload() {
-    if (currentScene) {
-        currentScene->unload();
-        currentScene = nullptr;
-    }
-}
-
-SceneManager::~SceneManager() {
-    unload();
 }

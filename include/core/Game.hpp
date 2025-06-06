@@ -1,7 +1,12 @@
 #pragma once
 
 #include <windows.h>
-#include <d3d11.h>
+#include <wrl/client.h>
+#include <d3d12.h>
+#include <dxgi1_6.h>
+#include <string>
+#include <memory>
+
 #include "core/SceneManager.hpp"
 
 class Game {
@@ -15,15 +20,25 @@ public:
 private:
     HINSTANCE hInstance;
     HWND hwnd;
-    SceneManager* sceneManager;
 
-    ID3D11Device* device;
-    ID3D11DeviceContext* context;
-    IDXGISwapChain* swapChain;
-    ID3D11RenderTargetView* renderTargetView;
+    UINT width = 1280;
+    UINT height = 720;
+    std::wstring windowTitle = L"Pokemon Simulator";
+
+    Microsoft::WRL::ComPtr<IDXGIFactory6> dxgiFactory;
+    Microsoft::WRL::ComPtr<ID3D12Device> device;
+    Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue;
+
+    UINT frameIndex;
+    UINT64 fenceValue;
+    HANDLE fenceEvent;
+
+    std::unique_ptr<SceneManager> sceneManager;
 
     bool initWindow();
-    bool initDirectX();
+    bool initD3D();
+    void mainLoop();
+    void update();
     void render();
-    void cleanUp();
+    void cleanup();
 };

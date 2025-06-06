@@ -1,15 +1,17 @@
 #pragma once
 
 #include "core/Scene.hpp"
+#include <memory>
 
 class SceneManager {
-private:
-    Scene* currentScene = nullptr;
-
 public:
-    void setScene(Scene* scene);
+    SceneManager();
+    ~SceneManager();
+
+    void changeScene(std::unique_ptr<Scene> newScene);
     void update(float deltaTime);
     void render();
-    void unload();
-    ~SceneManager();
+
+private:
+    std::unique_ptr<Scene> currentScene;
 };
