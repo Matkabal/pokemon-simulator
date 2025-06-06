@@ -1,0 +1,10 @@
+^D:\DEV-JOGOS\POKEMON-SIMULATOR\CMAKELISTS.TXT
+setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SD:/DEV-JOGOS/pokemon-simulator -BD:/DEV-JOGOS/pokemon-simulator/build --check-stamp-file D:/DEV-JOGOS/pokemon-simulator/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
