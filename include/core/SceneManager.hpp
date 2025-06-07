@@ -12,6 +12,8 @@ public:
     void update(float deltaTime);
     void render();
 
+    Scene* getCurrentScene();
+
 private:
     std::unique_ptr<Scene> currentScene;
 };

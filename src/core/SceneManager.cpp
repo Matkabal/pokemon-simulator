@@ -32,3 +32,7 @@ void SceneManager::render() {
         currentScene->render();
     }
 }
+
+Scene* SceneManager::getCurrentScene() {
+    return currentScene.get();
+}

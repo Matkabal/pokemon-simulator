@@ -1,4 +1,8 @@
 {
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format", // ou "llvm-vs-code-extensions.vscode-clangd"
+    },
+    "editor.formatOnSave": true,
     "files.associations": {
         "format": "cpp",
         "list": "cpp",
@@ -74,6 +78,12 @@
         "xmemory": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
-    }
+        "xutility": "cpp",
+        "codecvt": "cpp",
+        "regex": "cpp",
+        "shared_mutex": "cpp",
+        "span": "cpp",
+        "variant": "cpp"
+    },
+    "terminal.integrated.defaultProfile.windows": "Windows PowerShell"
 }

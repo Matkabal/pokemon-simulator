@@ -8,9 +8,8 @@ set(CMAKE_WIN32_EXECUTABLE ON)
 # Diretórios de cabeçalhos
 include_directories(include)
 
-# Define UNICODE para o Windows
+# Define UNICODE para o Windows e suprime warnings do MSVC
 add_definitions(-DUNICODE -D_UNICODE)
-
 add_definitions(-D_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING)
 
 # Coleta todos os arquivos .cpp no diretório src/
@@ -39,7 +38,21 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 
-# Vincula todas as bibliotecas necessárias
+# Baixa o repositório com d3dx12.h (somente header)
+FetchContent_Declare(
+  D3DX12
+  GIT_REPOSITORY https://github.com/microsoft/DirectX-Graphics-Samples.git
+  GIT_TAG master
+)
+FetchContent_MakeAvailable(D3DX12)
+
+# Adiciona os includes de D3DX12
+target_include_directories(POKEMON_SIMULATOR
+    PRIVATE
+        ${d3dx12_SOURCE_DIR}/MiniEngine/Core
+)
+
+# Bibliotecas necessárias
 target_link_libraries(POKEMON_SIMULATOR
     PRIVATE
         d3d12
